@@ -1,2 +1,3 @@
 class GraphType < ApplicationRecord
+
 end

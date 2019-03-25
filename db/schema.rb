@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2019_03_25_184734) do
     t.string "title"
     t.text "description"
     t.text "javascript"
+    t.text "graph_type"
     t.integer "likes"
-    t.integer "graph_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -4,8 +4,8 @@ class CreateExamples < ActiveRecord::Migration[5.2]
       t.string :title
       t.text :description
       t.text :javascript
+      t.text :graph_type
       t.integer :likes
-      t.integer :graph_type_id
 
       t.timestamps
     end
