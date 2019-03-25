@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+* Use localstorage to persist user's personal graphs
+* Use session cookie to recognize user and allow editing or deletion of recently created examples as long as cookie persists
