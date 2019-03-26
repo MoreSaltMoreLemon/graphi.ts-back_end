@@ -12,8 +12,17 @@ Example.new(title: "Bar Graph",
             graph_type: "bar",
             likes: 2).save
 
+line_graph = 
+<<-JS
+let canvas = document.querySelector("canvas");
+            let g = new Graphi(canvas);
+            g.draw(canvas);
+            let sine = g.genFn(Math.sin, { x: 0, y: 200 }, canvas.width, 200, 50, 5);
+            g.drawLine(sine, "blue");
+JS
+
 Example.new(title: "Line Graph", 
             description: "My favorite line graph",
-            javascript: "blahblahblahblahblah",
+            javascript: line_graph,
             graph_type: "line",
             likes: 2).save
