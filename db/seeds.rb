@@ -41,7 +41,7 @@ function_graph =
 <<-JS
 let canvas = document.querySelector("canvas");
 let g = new Graphi(canvas);
-
+g.draw(canvas);
 const cos = g.genFn(Math.cos, {x: 0, y: 40}, canvas.width, 100, 50, 20);
 g.drawLine(cos);
 const tan = g.genFn(Math.tan, {x: 0, y: 40}, canvas.width, 100, 50, 20);
@@ -58,6 +58,7 @@ sahir_graph =
 <<-JS
 let canvas = document.querySelector("canvas");
 let g = new Graphi(canvas);
+g.draw(canvas);
 const sahir = g.genFn(sahirFn, {x: 0, y: 40}, canvas.width, 100, 50, 1);
 g.drawLine(sahir);
 const natLog = g.genFn(naturalLog, {x: 0, y: 40}, canvas.width, 100, 50, 1);
