@@ -9,11 +9,12 @@
 
 scatter_graph = 
 <<-JS
-let canvas = document.querySelector("canvas");
-let g = new Graphi(canvas);
-g.draw(canvas);
-const sine = g.genFn(Math.sin, {x: 0, y: 40}, canvas.width, 100, 50, 15);
-g.drawPoints(sine, 2);
+const canvas = document.querySelector('canvas');
+let g = new Graphi(canvas, "default", .95, .95, -50, 200, -50, 200);
+g.drawGrid();
+
+const rand = g.genFn((x) => Math.random() * x + Math.random() * 5, 10, 1, .1);
+g.drawPoints(rand, 2);
 JS
 
 Example.new(title: "Scatter Graph", 
@@ -24,11 +25,15 @@ Example.new(title: "Scatter Graph",
 
 line_graph = 
 <<-JS
-let canvas = document.querySelector("canvas");
-let g = new Graphi(canvas);
-g.draw(canvas);
-let sine = g.genFn(Math.sin, { x: 0, y: 200 }, canvas.width, 200, 50, 5);
-g.drawLine(sine, "blue");
+const canvas = document.querySelector('canvas');
+let g = new Graphi(canvas, "default", .95, .95, -50, 200, -50, 200);
+g.drawGrid();
+
+const data = [{x: 0, y: 0}, {x: 100, y: 10}, {x: 200, y: 20}, {x: 300, y: 30}];
+g.drawLine(data, "blue");
+
+const moarData = [{x: 0, y: 0}, {x: 100, y: 100}, {x: 200, y: 200}, {x: 300, y: 300}];
+g.drawLine(moarData, "red");
 JS
 
 Example.new(title: "Line Graph", 
@@ -39,12 +44,17 @@ Example.new(title: "Line Graph",
 
 function_graph = 
 <<-JS
-let canvas = document.querySelector("canvas");
+const canvas = document.querySelector('canvas');
 let g = new Graphi(canvas);
-g.draw(canvas);
-const cos = g.genFn(Math.cos, {x: 0, y: 40}, canvas.width, 100, 50, 20);
+g.drawGrid();
+
+const sine = g.genFn(Math.sin, 10, 1, .1);
+g.drawLine(sine);
+
+const cos = g.genFn(Math.cos, 20, 5, .2);
 g.drawLine(cos);
-const tan = g.genFn(Math.tan, {x: 0, y: 40}, canvas.width, 100, 50, 20);
+
+const tan = g.genFn(Math.tan, 10, 5, .1);
 g.drawLine(tan);
 JS
 
@@ -56,54 +66,23 @@ Example.new(title: "Function Graph",
 
 sahir_graph = 
 <<-JS
-// identify your canvas element
-let canvas = document.querySelector("canvas");
+const canvas = document.querySelector('canvas');
 let g = new Graphi(canvas);
+g.drawGrid();
 
-// draw your axis
-g.draw(canvas);
-
-function sahirFn(x) {
- return Math.pow(Math.atan(x), 1 / 3);
-}
-
-// graph your function
-// generate coordinates
-const sahir = 
-g.genFn(
-        sahirFn,        // function to graph
-        {x: 0, y: 40},  // starting coordinate
-        canvas.width,   // max x value
-        100,            // amplitude
-        50,             // frequency
-        1               // step
-    );
-// render function
+const sahir = g.genFn(sahirFn, 20, 10, 1);
 g.drawLine(sahir);
 
-const natLog = g.genFn(naturalLog, {x: 0, y: 40}, canvas.width, 100, 50, 1);
+const natLog = g.genFn(naturalLog, 20, 5, 1);
 g.drawLine(natLog);
-
-const enLogEn = g.genFn(nLogN, {x: 0, y: 0}, canvas.width, 1, 10, 1);
-g.drawLine(enLogEn);
-
-const logEn = g.genFn(logN, {x: 0, y: 0}, canvas.width, 1, 10, 1);
-g.drawLine(logEn);
-
-
 
 function naturalLog(x) {
   return Math.log(x);
 }
 
-function logN(x) {
-  return Math.log2(x);
+function sahirFn(x) {
+  return Math.pow(Math.atan(x), 1 / 3);
 }
-
-function nLogN(x) {
-  return x * Math.log2(x);
-}
-
 JS
 
 Example.new(title: "Sahir Graph", 
@@ -111,3 +90,4 @@ Example.new(title: "Sahir Graph",
   javascript: sahir_graph,
   graph_type: "complex function",
   likes: 2).save
+
