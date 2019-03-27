@@ -91,3 +91,19 @@ Example.new(title: "Sahir Graph",
   graph_type: "complex function",
   likes: 2).save
 
+bezier_graph = 
+<<-JS
+const canvas = document.querySelector('canvas');
+let g = new Graphi(canvas, "default", .95, .95, -50, 200, -50, 200);
+g.drawGrid();
+
+const sine = g.genFn((x) => Math.sin(x) * 40, 1, 1, 30);
+g.drawBezier(sine, '', 30);
+g.drawPoints(sine);
+JS
+
+Example.new(title: "bezier Graph", 
+            description: "Example of a bezier Graph",
+            javascript: bezier_graph,
+            graph_type: "bezier",
+            likes: 2).save
