@@ -56,21 +56,54 @@ Example.new(title: "Function Graph",
 
 sahir_graph = 
 <<-JS
+// identify your canvas element
 let canvas = document.querySelector("canvas");
 let g = new Graphi(canvas);
+
+// draw your axis
 g.draw(canvas);
-const sahir = g.genFn(sahirFn, {x: 0, y: 40}, canvas.width, 100, 50, 1);
-g.drawLine(sahir);
-const natLog = g.genFn(naturalLog, {x: 0, y: 40}, canvas.width, 100, 50, 1);
-g.drawLine(natLog);
 
 function sahirFn(x) {
  return Math.pow(Math.atan(x), 1 / 3);
 }
 
-function naturalLog(x ) {
+// graph your function
+// generate coordinates
+const sahir = 
+g.genFn(
+        sahirFn,        // function to graph
+        {x: 0, y: 40},  // starting coordinate
+        canvas.width,   // max x value
+        100,            // amplitude
+        50,             // frequency
+        1               // step
+    );
+// render function
+g.drawLine(sahir);
+
+const natLog = g.genFn(naturalLog, {x: 0, y: 40}, canvas.width, 100, 50, 1);
+g.drawLine(natLog);
+
+const enLogEn = g.genFn(nLogN, {x: 0, y: 0}, canvas.width, 1, 10, 1);
+g.drawLine(enLogEn);
+
+const logEn = g.genFn(logN, {x: 0, y: 0}, canvas.width, 1, 10, 1);
+g.drawLine(logEn);
+
+
+
+function naturalLog(x) {
   return Math.log(x);
 }
+
+function logN(x) {
+  return Math.log2(x);
+}
+
+function nLogN(x) {
+  return x * Math.log2(x);
+}
+
 JS
 
 Example.new(title: "Sahir Graph", 
