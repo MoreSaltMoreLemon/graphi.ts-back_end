@@ -107,3 +107,22 @@ Example.new(title: "bezier Graph",
             javascript: bezier_graph,
             graph_type: "bezier",
             likes: 2).save
+
+line_with_points_graph = 
+<<-JS
+const canvas = document.querySelector('canvas');
+let g = new Graphi(canvas, "default", .95, .95, -50, 200, -50, 200);
+g.drawGrid();
+
+const sine = g.genFn((x) => Math.sin(x) * 40, 1, 1, 30);
+g.drawBezier(sine, '', 30);
+g.drawPoints(sine);
+
+g.drawLineWithPoints([{x: 0, y: 0}, {x: 10, y: 20}, {x: 30, y: -20}]);
+JS
+
+Example.new(title: "Line with Points Graph", 
+  description: "Example of a Line with Points Graph",
+  javascript: line_with_points_graph,
+  graph_type: "line_with_points",
+  likes: 2).save
