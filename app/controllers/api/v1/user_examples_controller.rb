@@ -1,5 +1,5 @@
 class Api::V1::UserExamplesController < ApplicationController
-  before_action :find_example, only: [:create, :edit, :update, :destroy]
+  # before_action :find_example, only: [:edit, :update, :destroy]
 
   def index
     @user_examples = UserExample.all
@@ -31,7 +31,7 @@ class Api::V1::UserExamplesController < ApplicationController
   private
 
   def user_example_params
-    params.permit(:id, :title, :description, :javascript, :graph_type, :image, :likes)
+    params.require(:user_example).permit(:id, :title, :description, :javascript, :graph_type, :image, :likes)
   end
 
   def find_user_example
