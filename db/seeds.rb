@@ -10,7 +10,7 @@
 scatter_graph = 
 <<-JS
 const canvas = document.querySelector('canvas');
-let g = new Graphi(canvas, "default", .95, .95, -50, 200, -50, 200);
+let g = new Graphi(canvas, "default", -50, 200, -50, 200);
 g.drawGrid();
 
 const rand = g.genFn((x) => Math.random() * x + Math.random() * 5, 10, 1, .1);
@@ -26,14 +26,14 @@ Example.new(title: "Scatter Graph",
 line_graph = 
 <<-JS
 const canvas = document.querySelector('canvas');
-let g = new Graphi(canvas, "default", .95, .95, -50, 200, -50, 200);
+let g = new Graphi(canvas, "default", -50, 200, -50, 200);
 g.drawGrid();
 
 const data = [{x: 0, y: 0}, {x: 100, y: 10}, {x: 200, y: 20}, {x: 300, y: 30}];
-g.drawLine(data, "blue");
+g.drawLine(data, "blue", "blue");
 
 const moarData = [{x: 0, y: 0}, {x: 100, y: 100}, {x: 200, y: 200}, {x: 300, y: 300}];
-g.drawLine(moarData, "red");
+g.drawLine(moarData, "red", "red");
 JS
 
 Example.new(title: "Line Graph", 
@@ -71,10 +71,10 @@ let g = new Graphi(canvas);
 g.drawGrid();
 
 const sahir = g.genFn(sahirFn, 20, 10, 1);
-g.drawLine(sahir);
+g.drawLine(sahir, '', "sahir");
 
 const natLog = g.genFn(naturalLog, 20, 5, 1);
-g.drawLine(natLog);
+g.drawLine(natLog, '', "natlog");
 
 function naturalLog(x) {
   return Math.log(x);
@@ -94,7 +94,7 @@ Example.new(title: "Sahir Graph",
 bezier_graph = 
 <<-JS
 const canvas = document.querySelector('canvas');
-let g = new Graphi(canvas, "default", .95, .95, -50, 200, -50, 200);
+let g = new Graphi(canvas, "default", -50, 200, -50, 200);
 g.drawGrid();
 
 const sine = g.genFn((x) => Math.sin(x) * 40, 1, 1, 30);
@@ -111,7 +111,7 @@ Example.new(title: "bezier Graph",
 line_with_points_graph = 
 <<-JS
 const canvas = document.querySelector('canvas');
-let g = new Graphi(canvas, "default", .95, .95, -50, 200, -50, 200);
+let g = new Graphi(canvas, "default", -50, 200, -50, 200);
 g.drawGrid();
 
 const sine = g.genFn((x) => Math.sin(x) * 40, 1, 1, 30);
