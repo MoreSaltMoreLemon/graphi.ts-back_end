@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  javascript: MyText
+  graph_type: MyString
+  image: MyText
+  likes: 1
+
+two:
+  title: MyString
+  description: MyText
+  javascript: MyText
+  graph_type: MyString
+  image: MyText
+  likes: 1
