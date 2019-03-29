@@ -10,30 +10,30 @@
 scatter_graph = 
 <<-JS
 const canvas = document.querySelector('canvas');
-let g = new Graphi(canvas, "default", -50, 200, -50, 200);
+let g = new Graphi(canvas, {label: "default", startX: -50, endX: 200, startY: -50, endY: 200});
 g.drawGrid();
 
-const rand = g.genFn((x) => Math.random() * x + Math.random() * 5, 10, 1, .1);
-g.drawPoints(rand, 2);
+const rand = g.genFn((x) => Math.random() * x + Math.random() * 5, {amplitude: 10, frequency: 1, step: .1});
+g.drawPoints(rand, {label: "scatter"});
 JS
 
 Example.new(title: "Scatter Graph", 
             description: "Example of a Scatter Graph",
             javascript: scatter_graph,
-            graph_type: "scatter",
+            graph_type: "y = x * random + 5 * random",
             likes: 2).save
 
 line_graph = 
 <<-JS
 const canvas = document.querySelector('canvas');
-let g = new Graphi(canvas, "default", -50, 200, -50, 200);
+let g = new Graphi(canvas, {theme: "default", startX: -50, endX: 200, startY: -50, endY: 200});
 g.drawGrid();
 
 const data = [{x: 0, y: 0}, {x: 100, y: 10}, {x: 200, y: 20}, {x: 300, y: 30}];
-g.drawLine(data, "blue", "blue");
+g.drawLine(data, {color: "blue", label: "y = x / 10"});
 
 const moarData = [{x: 0, y: 0}, {x: 100, y: 100}, {x: 200, y: 200}, {x: 300, y: 300}];
-g.drawLine(moarData, "red", "red");
+g.drawLine(moarData, {color: "red", label: "y = x"});
 JS
 
 Example.new(title: "Line Graph", 
@@ -48,14 +48,14 @@ const canvas = document.querySelector('canvas');
 let g = new Graphi(canvas);
 g.drawGrid();
 
-const sine = g.genFn(Math.sin, 10, 1, .1);
-g.drawLine(sine);
+const sine = g.genFn(Math.sin, {amplitude: 10, frequency: 1, step: .1});
+g.drawLine(sine, {label: "sine"});
 
-const cos = g.genFn(Math.cos, 20, 5, .2);
-g.drawLine(cos);
+const cos = g.genFn(Math.cos, {amplitude: 10, frequency: 1, step: .1});
+g.drawLine(cos, {label: "cosine"});
 
-const tan = g.genFn(Math.tan, 10, 5, .1);
-g.drawLine(tan);
+const tan = g.genFn(Math.tan, {amplitude: 10, frequency: 1, step: .1});
+g.drawLine(tan, {label: "tangent"});
 JS
 
 Example.new(title: "Function Graph", 
@@ -70,11 +70,11 @@ const canvas = document.querySelector('canvas');
 let g = new Graphi(canvas);
 g.drawGrid();
 
-const sahir = g.genFn(sahirFn, 20, 10, 1);
-g.drawLine(sahir, '', "sahir");
+const sahir = g.genFn(sahirFn, {amplitude: 20, frequency: 10, step: 1});
+g.drawLine(sahir, {label: "sahir"});
 
-const natLog = g.genFn(naturalLog, 20, 5, 1);
-g.drawLine(natLog, '', "natlog");
+const natLog = g.genFn(naturalLog, {amplitude: 20, frequency: 5, step: 1});
+g.drawLine(natLog, {label: "natural log"});
 
 function naturalLog(x) {
   return Math.log(x);
@@ -94,11 +94,11 @@ Example.new(title: "Sahir Graph",
 bezier_graph = 
 <<-JS
 const canvas = document.querySelector('canvas');
-let g = new Graphi(canvas, "default", -50, 200, -50, 200);
+let g = new Graphi(canvas, {theme: "dark", startX: -50, endX: 200, startY: -50, endY: 200});
 g.drawGrid();
 
-const sine = g.genFn((x) => Math.sin(x) * 40, 1, 1, 30);
-g.drawBezier(sine, '', 30);
+const sine = g.genFn((x) => Math.sin(x) * 40, {amplitude: 1, frequency: 1, step: 30});
+g.drawBezier(sine, {weight: 30, label: "bezier curve of sine"});
 g.drawPoints(sine);
 JS
 
@@ -111,18 +111,49 @@ Example.new(title: "bezier Graph",
 line_with_points_graph = 
 <<-JS
 const canvas = document.querySelector('canvas');
-let g = new Graphi(canvas, "default", -50, 200, -50, 200);
+let g = new Graphi(canvas, {theme: "light", startX: -50, endX: 200, startY: -50, endY: 200});
 g.drawGrid();
 
-const sine = g.genFn((x) => Math.sin(x) * 40, 1, 1, 30);
-g.drawBezier(sine, '', 30);
-g.drawPoints(sine);
+const sine = g.genFn((x) => Math.sin(x) * 40, {amplitude: 1, frequency: 1, step: 30});
+g.drawBezier(sine, {weight: 30});
+g.drawPoints(sine, {label: "sine"});
 
-g.drawLineWithPoints([{x: 0, y: 0}, {x: 10, y: 20}, {x: 30, y: -20}]);
+g.drawLineWithPoints([{x: 0, y: 0}, {x: 10, y: 20}, {x: 30, y: -20}], {label: "y = ???"});
 JS
 
 Example.new(title: "Line with Points Graph", 
   description: "Example of a Line with Points Graph",
   javascript: line_with_points_graph,
   graph_type: "line_with_points",
+  likes: 2).save
+
+big_o_graph = 
+<<-JS
+const canvas = document.querySelector('canvas');
+let g = new Graphi(canvas, {theme: "dark", startX: 0, endX: 100, startY: 0, endY: 100});
+g.drawGrid();
+
+const constant = g.genFn((x) => 10, {amplitude: 1, frequency: 1, step: 1});
+g.drawLine(constant, {label: "constant"});
+
+const logN = g.genFn((x) => Math.log2(x), {amplitude: 1, frequency: 1, step: 1});
+g.drawLine(logN, {label: "log(n)"});
+
+const linear = g.genFn((x) => x, {amplitude: 1, frequency: 1, step: 1});
+g.drawLine(linear, {label: "linear"});
+
+const nLogN = g.genFn((x) => x * Math.log2(x), {amplitude: 1, frequency: 1, step: 1});
+g.drawLine(nLogN, {label: "n * log(n)"});
+
+const nSquared = g.genFn((x) => x**2, {amplitude: 1, frequency: 1, step: 1});
+g.drawLine(nSquared, {label: "n^2"});
+
+const nCubed = g.genFn((x) => x**3, {amplitude: 1, frequency: 1, step: 1});
+g.drawLine(nCubed, {label: "n^3"});
+JS
+
+Example.new(title: "Big(O) Graph", 
+  description: "Big O Graph",
+  javascript: big_o_graph,
+  graph_type: "exponential curves",
   likes: 2).save
