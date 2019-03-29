@@ -157,3 +157,37 @@ Example.new(title: "Big(O) Graph",
   javascript: big_o_graph,
   graph_type: "exponential curves",
   likes: 2).save
+
+big_o_graph = 
+<<-JS
+const canvas = document.querySelector('canvas');
+
+const customTheme = {
+    name: "custom",
+    backgroundColor: {r: 245, g: 245, b: 245, a: 1},
+    axisColor: {r: 230, g: 230, b: 230, a: 1},
+    colors: [ {r: 255, g: 177, b: 193, a: 1}, 
+              {r: 255, g: 176, b: 222, a: 1},
+              {r: 75, g: 191, b: 192, a: 1},
+              {r: 255, g: 99, b: 133, a: 1},
+              {r: 0, g: 63, b: 65, a: 1},
+              {r: 51, g: 53, b: 56, a: 1},
+              {r: 255, g: 207, b: 161, a: 1},
+              {r: 166, g: 223, b: 224, a: 1},
+              {r: 153, g: 102, b: 255, a: 1}],
+    lastColorIndex: 0
+  }
+
+let g = new Graphi(canvas, {theme: customTheme, startX: -50, endX: 200, startY: -50, endY: 200});
+g.drawGrid();
+
+const sine = g.genFn((x) => Math.sin(x) * 40, {amplitude: 1, frequency: 1, step: 30});
+g.drawBezier(sine, {weight: 30, label: "bezier curve of sine"});
+g.drawPoints(sine);
+JS
+
+Example.new(title: "Custom Theme", 
+  description: "Custom Theme",
+  javascript: customTheme,
+  graph_type: "custom-theme",
+  likes: 2).save
