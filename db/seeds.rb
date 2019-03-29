@@ -158,7 +158,7 @@ Example.new(title: "Big(O) Graph",
   graph_type: "exponential curves",
   likes: 2).save
 
-big_o_graph = 
+custom_theme = 
 <<-JS
 const canvas = document.querySelector('canvas');
 
@@ -188,6 +188,6 @@ JS
 
 Example.new(title: "Custom Theme", 
   description: "Custom Theme",
-  javascript: customTheme,
+  javascript: custom_theme,
   graph_type: "custom-theme",
   likes: 2).save
