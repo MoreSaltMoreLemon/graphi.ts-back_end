@@ -10,10 +10,10 @@
 scatter_graph = 
 <<-JS
 const canvas = document.querySelector('canvas');
-let g = new Graphi(canvas, {label: "default", startX: -50, endX: 200, startY: -50, endY: 200});
+let g = new Graphi(canvas, {theme: "dark", startX: -50, endX: 200, startY: -50, endY: 200});
 g.drawGrid();
 
-const rand = g.genFn((x) => Math.random() * x + Math.random() * 5, {amplitude: 10, frequency: 1, step: .1});
+const rand = g.genFn((x) => Math.random() * x + Math.random() * 5, {amplitude: 10, offset: 1, step: .1});
 g.drawPoints(rand, {label: "scatter"});
 JS
 
@@ -48,13 +48,13 @@ const canvas = document.querySelector('canvas');
 let g = new Graphi(canvas);
 g.drawGrid();
 
-const sine = g.genFn(Math.sin, {amplitude: 10, frequency: 1, step: .1});
+const sine = g.genFn(Math.sin, {amplitude: 10, offset: 0, step: .1});
 g.drawLine(sine, {label: "sine"});
 
-const cos = g.genFn(Math.cos, {amplitude: 10, frequency: 1, step: .1});
+const cos = g.genFn(Math.cos, {amplitude: 10, offset: 10, step: .1});
 g.drawLine(cos, {label: "cosine"});
 
-const tan = g.genFn(Math.tan, {amplitude: 10, frequency: 1, step: .1});
+const tan = g.genFn(Math.tan, {amplitude: 10, offset: 0, step: .1});
 g.drawLine(tan, {label: "tangent"});
 JS
 
@@ -70,10 +70,10 @@ const canvas = document.querySelector('canvas');
 let g = new Graphi(canvas);
 g.drawGrid();
 
-const sahir = g.genFn(sahirFn, {amplitude: 20, frequency: 10, step: 1});
+const sahir = g.genFn(sahirFn, {amplitude: 20, offset: 10, step: 1});
 g.drawLine(sahir, {label: "sahir"});
 
-const natLog = g.genFn(naturalLog, {amplitude: 20, frequency: 5, step: 1});
+const natLog = g.genFn(naturalLog, {amplitude: 20, offset: 0, step: 1});
 g.drawLine(natLog, {label: "natural log"});
 
 function naturalLog(x) {
@@ -97,8 +97,8 @@ const canvas = document.querySelector('canvas');
 let g = new Graphi(canvas, {theme: "dark", startX: -50, endX: 200, startY: -50, endY: 200});
 g.drawGrid();
 
-const sine = g.genFn((x) => Math.sin(x) * 40, {amplitude: 1, frequency: 1, step: 30});
-g.drawBezier(sine, {weight: 30, label: "bezier curve of sine"});
+const sine = g.genFn((x) => Math.sin(x) * 40, {amplitude: 1, step: 30});
+g.drawBezier(sine, {label: "bezier curve of sine"});
 g.drawPoints(sine);
 JS
 
@@ -114,8 +114,8 @@ const canvas = document.querySelector('canvas');
 let g = new Graphi(canvas, {theme: "light", startX: -50, endX: 200, startY: -50, endY: 200});
 g.drawGrid();
 
-const sine = g.genFn((x) => Math.sin(x) * 40, {amplitude: 1, frequency: 1, step: 30});
-g.drawBezier(sine, {weight: 30});
+const sine = g.genFn((x) => Math.sin(x) * 40, {amplitude: 1, step: 30});
+g.drawBezier(sine);
 g.drawPoints(sine, {label: "sine"});
 
 g.drawLineWithPoints([{x: 0, y: 0}, {x: 10, y: 20}, {x: 30, y: -20}], {label: "y = ???"});
@@ -133,22 +133,22 @@ const canvas = document.querySelector('canvas');
 let g = new Graphi(canvas, {theme: "dark", startX: 0, endX: 100, startY: 0, endY: 100});
 g.drawGrid();
 
-const constant = g.genFn((x) => 10, {amplitude: 1, frequency: 1, step: 1});
+const constant = g.genFn((x) => 10, {amplitude: 1, step: 1});
 g.drawLine(constant, {label: "constant"});
 
-const logN = g.genFn((x) => Math.log2(x), {amplitude: 1, frequency: 1, step: 1});
+const logN = g.genFn((x) => Math.log2(x), {amplitude: 1, step: 1});
 g.drawLine(logN, {label: "log(n)"});
 
-const linear = g.genFn((x) => x, {amplitude: 1, frequency: 1, step: 1});
+const linear = g.genFn((x) => x, {amplitude: 1, step: 1});
 g.drawLine(linear, {label: "linear"});
 
-const nLogN = g.genFn((x) => x * Math.log2(x), {amplitude: 1, frequency: 1, step: 1});
+const nLogN = g.genFn((x) => x * Math.log2(x), {amplitude: 1, step: 1});
 g.drawLine(nLogN, {label: "n * log(n)"});
 
-const nSquared = g.genFn((x) => x**2, {amplitude: 1, frequency: 1, step: 1});
+const nSquared = g.genFn((x) => x**2, {amplitude: 1, step: 1});
 g.drawLine(nSquared, {label: "n^2"});
 
-const nCubed = g.genFn((x) => x**3, {amplitude: 1, frequency: 1, step: 1});
+const nCubed = g.genFn((x) => x**3, {amplitude: 1, step: 1});
 g.drawLine(nCubed, {label: "n^3"});
 JS
 
@@ -164,25 +164,25 @@ const canvas = document.querySelector('canvas');
 
 const customTheme = {
     name: "custom",
-    backgroundColor: {r: 245, g: 245, b: 245, a: 1},
-    axisColor: {r: 230, g: 230, b: 230, a: 1},
-    colors: [ {r: 255, g: 177, b: 193, a: 1}, 
-              {r: 255, g: 176, b: 222, a: 1},
-              {r: 75, g: 191, b: 192, a: 1},
-              {r: 255, g: 99, b: 133, a: 1},
-              {r: 0, g: 63, b: 65, a: 1},
-              {r: 51, g: 53, b: 56, a: 1},
-              {r: 255, g: 207, b: 161, a: 1},
-              {r: 166, g: 223, b: 224, a: 1},
-              {r: 153, g: 102, b: 255, a: 1}],
+    backgroundColor: {r: 245, g: 245, b: 245},
+    axisColor: {r: 230, g: 230, b: 230},
+    colors: [ {r: 255, g: 177, b: 193}, 
+              {r: 255, g: 176, b: 222},
+              {r: 75, g: 191, b: 192},
+              {r: 255, g: 99, b: 133},
+              {r: 0, g: 63, b: 65},
+              {r: 51, g: 53, b: 56},
+              {r: 255, g: 207, b: 161},
+              {r: 166, g: 223, b: 224},
+              {r: 153, g: 102, b: 255}],
     lastColorIndex: 0
   }
 
 let g = new Graphi(canvas, {theme: customTheme, startX: -50, endX: 200, startY: -50, endY: 200});
 g.drawGrid();
 
-const sine = g.genFn((x) => Math.sin(x) * 40, {amplitude: 1, frequency: 1, step: 30});
-g.drawBezier(sine, {weight: 30, label: "bezier curve of sine"});
+const sine = g.genFn((x) => Math.sin(x) * 40, {amplitude: 1, step: 30});
+g.drawBezier(sine, {label: "bezier curve of sine"});
 g.drawPoints(sine);
 JS
 
